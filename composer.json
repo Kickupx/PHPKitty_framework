@@ -8,5 +8,10 @@
             "email": "Kickupx@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "PHPKitty\\": "src/"
+        }
+    },
     "require": {}
 }
