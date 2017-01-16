@@ -17,8 +17,6 @@ final class Permission extends \Twig_TokenParser
         $lineno = $token->getLine();
         $stream = $this->parser->getStream();
         $name = $stream->expect(\Twig_Token::NAME_TYPE)->getValue();
-        $stream->expect(\Twig_Token::BLOCK_END_TYPE);
-
         $permission_value = $this->permissions->valueOf($name);
         if($permission_value === FALSE)
             throw new \Twig_Syntax_Error("There are no permission named $name");
@@ -27,10 +25,26 @@ final class Permission extends \Twig_TokenParser
         $this->parser->setBlock($name, $block, $lineno);
         $this->parser->pushLocalScope();
 
-        $body = $this->parser->subparse(array($this, 'decideBlockEnd'), true);
-        $block->setNode('body', $body);
-        $stream->expect(\Twig_Token::BLOCK_END_TYPE);
+        if($stream->nextIf(\Twig_Token::BLOCK_END_TYPE)) {
+            $body = $this->parser->subparse(
+                [$this, 'decideBlockEnd']
+                , true
+            );
 
+            if ($token = $stream->nextIf(\Twig_Token::NAME_TYPE)) {
+                $value = $token->getValue();
+
+                if ($value != $name)
+                    throw new \Twig_Error_Syntax(sprintf('Expected endpermission for block "%s" (but "%s" given).', $name, $value), $stream->getCurrent()->getLine(), $stream->getSourceContext());
+            }
+        } else {
+            $body = new \Twig_Node(array(
+                new \Twig_Node_Print($this->parser->getExpressionParser()->parseExpression(), $lineno),
+            ));
+        }
+        $stream->expect(\Twig_Token::BLOCK_END_TYPE);
+        
+        $block->setNode('body', $body);
         $this->parser->popBlockStack();
         $this->parser->popLocalScope();
         
