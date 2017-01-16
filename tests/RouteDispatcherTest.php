@@ -2,6 +2,7 @@
 
 use PHPKitty\RouteDispatcher;
 use PHPKitty\UserPermissions;
+use PHPKitty\Template\TextTemplate;
 use PHPKitty\TwigNode\Permission as NodePermissions;
 
 use FastRoute\Dispatcher as FastD;
