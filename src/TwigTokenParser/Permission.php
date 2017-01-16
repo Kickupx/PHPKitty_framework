@@ -19,7 +19,7 @@ final class Permission extends \Twig_TokenParser
         $name = $stream->expect(\Twig_Token::NAME_TYPE)->getValue();
         $permission_value = $this->permissions->valueOf($name);
         if($permission_value === FALSE)
-            throw new \Twig_Syntax_Error("There are no permission named $name");
+            throw new \Twig_Error_Syntax("There are no permission named $name");
 
         $block = new \Twig_Node_Block($name, new \Twig_Node(array()), $lineno);
         $this->parser->setBlock($name, $block, $lineno);

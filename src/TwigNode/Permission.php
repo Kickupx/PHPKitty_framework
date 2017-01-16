@@ -34,4 +34,8 @@ final class Permission extends \Twig_Node
             ->write("}\n\n")
         ;
     }
+
+    public static function reset() {
+        self::$has_generated_init = false;
+    }
 }

@@ -16,11 +16,11 @@ final class UserPermissions {
     public function setCurrent($name) {
         $v = $this->valueOf($name);
         if($v === FALSE)
-            throw new Exception("There are now permission named $name");
+            throw new Exception("There are no permission named $name");
         self::$permission = $v;
     }
 
-    public function all_names() {
+    public function allNames() {
         return $this->permission_names;
     }
 

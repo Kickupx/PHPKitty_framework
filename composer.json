@@ -14,6 +14,7 @@
         }
     },
     "require": {
-        "twig/twig": "~2.0"
+        "twig/twig": "~2.0",
+        "nikic/fast-route": "~1.1"
     }
 }

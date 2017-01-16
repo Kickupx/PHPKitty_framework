@@ -3,8 +3,10 @@
 /vendor
 /vendor/*
 /playground.php
+/index.php
 /composer.lock
 /templates
 /templates/*
 /cache/*
 /cache
+/.htaccess
