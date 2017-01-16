@@ -1,0 +1,12 @@
+{
+    "name": "kickupx/phpkitty",
+    "description": "Introspective web framework",
+    "license": "LGPL",
+    "authors": [
+        {
+            "name": "Kickupx",
+            "email": "Kickupx@gmail.com"
+        }
+    ],
+    "require": {}
+}
