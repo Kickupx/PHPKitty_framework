@@ -16,7 +16,7 @@ class LazyModuleEmit extends \Twig_TokenParser {
         $stream = $this->parser->getStream();
         $stream->expect(\Twig_Token::BLOCK_END_TYPE);
 
-        return new \PHPKitty\TwigNode\LazyModuleEmit($this->generator);
+        return new \PHPKitty\TwigNode\LazyModuleEmit($this->generator, $lineno, $this->getTag());
     }
 
     public function getTag() {
