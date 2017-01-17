@@ -3,10 +3,8 @@ namespace PHPKitty;
 
 class RouteDispatcher {
     private $router;
-    private $module_list;
 
-    public function __construct(array $module_list) {
-        $this->module_list = $module_list;
+    public function __construct() {
         $this->router = new \FastRoute\RouteCollector(
             new \FastRoute\RouteParser\Std(), new \FastRoute\DataGenerator\GroupCountBased() 
         );
