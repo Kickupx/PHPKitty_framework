@@ -1,7 +1,7 @@
 <?php
 namespace PHPKitty;
 
-class LazyModuleProcessor implements ArrayAccess {
+class LazyModuleProcessor implements \ArrayAccess {
     private $value = null;
     private $has_executed = false;
     private $module;
