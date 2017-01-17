@@ -3,7 +3,11 @@
 use PHPKitty\RouteDispatcher;
 use PHPKitty\UserPermissions;
 use PHPKitty\Template\TextTemplate;
+use PHPKitty\DI;
 use PHPKitty\TwigNode\Permission as NodePermissions;
+
+use DI\ContainerBuilder;
+use DI\Container;
 
 use FastRoute\Dispatcher as FastD;
 
@@ -31,13 +35,34 @@ class RouteDispatcherTest extends TestCase {
         $this->assertEquals($d->dispatch('POST', '/not_exists')[0], FastD::NOT_FOUND);
     }
 
-    private function makeDispatcher($method) {
-        NodePermissions::reset();
-        $permissions = new UserPermissions(['guest', 'user']);
-        $permissions->setCurrent('guest');
+    public function testRender() {
+        self::setupDI();
+        $dispatcher = $this->makeDispatcher('GET');
+        $dispatch = $dispatcher->dispatch('GET', '/index');
+        $this->assertEquals($dispatch[0], FastRoute\Dispatcher::FOUND);
+        
+        $dispatch_result = $dispatch[1]();
+        $twig = DI::get(Twig_Environment::class);
+        $text = $twig->render($dispatch_result->templateName(), []);
+        $this->assertEquals('content', $text);
+    }
 
-        $dispatcher = new RouteDispatcher($permissions, []);
-        call_user_func([$dispatcher, $method], '/index', [], new TextTemplate(''));
+    private function setupDI() {
+        $c = new ContainerBuilder();
+        $c->addDefinitions([
+            Twig_LoaderInterface::class => function(Container $c) { 
+                return new Twig_Loader_Array(['/index' => 'content']);
+            },
+            Twig_Environment::class => function(Container $c) {
+                return new Twig_Environment($c->get(Twig_LoaderInterface::class));
+            }
+        ]);
+        DI::setContainer($c->build());
+    }
+
+    private function makeDispatcher($method) {
+        $dispatcher = new RouteDispatcher([]);
+        call_user_func([$dispatcher, $method], '/index', [], '/index');
         return $dispatcher;
     }
 }

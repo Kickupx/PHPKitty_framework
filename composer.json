@@ -11,11 +11,15 @@
     "autoload": {
         "psr-4": {
             "PHPKitty\\": "src/"
-        }
+        },
+        "files": [
+            "src/functions.php"
+        ]
     },
     "require": {
         "twig/twig": "~2.0",
         "nikic/fast-route": "~1.1",
-        "php-di/php-di": "~5.4"
+        "php-di/php-di": "~5.4",
+        "doctrine/annotations": "~1.3"
     }
 }
