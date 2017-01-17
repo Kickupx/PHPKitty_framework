@@ -20,6 +20,6 @@ class LazyModuleEmit extends \Twig_TokenParser {
     }
 
     public function getTag() {
-        return 'phpkitty_lazy_module_emit'
+        return 'phpkitty_lazy_module_emit';
     }
 }
