@@ -10,7 +10,7 @@ class FileSystemTemplateTest extends TestCase {
 
     public function testName() {
         $template = new FileSystemTemplate(self::$DIR, 'foo.html');
-        $this->assertEquals('foo.html', $template);
+        $this->assertEquals('foo.html', $template->name());
     }
 
     public function testFooContent() {

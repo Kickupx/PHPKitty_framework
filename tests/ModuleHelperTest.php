@@ -12,4 +12,12 @@ class ModuleHelperTests extends TestCase  {
 
         $this->assertEquals(new ModuleInstruction('module', [1,2,3]), $module);
     }
+
+    public function testModuleHelperTurnsSingleInto1DArray() {
+        $helper = new ModuleHelper();
+        $module = $helper->module(['foo' => 'bar']);
+        $this->assertEquals([
+            'foo' => 'bar'
+        ], $module->input());
+    }
 }
