@@ -4,10 +4,10 @@ namespace PHPKitty\TwigTokenParser;
 use \PHPKitty\LazyModuleLoaderGenerator;
 
 class LazyModuleEmit extends \Twig_TokenParser {
-    private $template;
+    private $generator;
 
-    public function __construct(LazyModuleLoaderGenerator $template) {
-        $this->template = $template;
+    public function __construct(LazyModuleLoaderGenerator $generator) {
+        $this->template = $generator;
     }
 
     public function parse(\Twig_Token $token)
@@ -16,7 +16,7 @@ class LazyModuleEmit extends \Twig_TokenParser {
         $stream = $this->parser->getStream();
         $stream->expect(\Twig_Token::BLOCK_END_TYPE);
 
-        return new \PHPKitty\TwigNode\LazyModuleEmit($this->template);
+        return new \PHPKitty\TwigNode\LazyModuleEmit($this->generator);
     }
 
     public function getTag() {
