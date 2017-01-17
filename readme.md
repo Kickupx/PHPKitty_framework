@@ -6,6 +6,12 @@ modules can written and reused everywhere with very little PHP. An example would
 There it could be modules Facebook.login and Facebook.user which values can be presented on a template with only a few
 PHP lines.
 
+# Working with others
+
+I am huge fan open source and always want to take advantage of that. Therefore everything this frontend does is taking
+the Twig template engine and creates a system where injecting variables into those templates.
+With this you can use whatever fullblown framework you want and it will just work.
+
 # License
 
 All PHPKitty related work is licensed under the LGPL version 3 license. 
