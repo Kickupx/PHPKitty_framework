@@ -17,6 +17,7 @@
         ]
     },
     "require": {
+        "php": "^7.0",
         "twig/twig": "~2.0",
         "nikic/fast-route": "~1.1",
         "php-di/php-di": "~5.4",

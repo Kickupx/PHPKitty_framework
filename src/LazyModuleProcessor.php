@@ -67,7 +67,7 @@ class LazyModuleProcessor implements ArrayAccess {
         unset($this->value[$offset]);
     }
 
-    protected function run_if_necessary() {
+    private function run_if_necessary() {
         if(!$has_executed) {
             $has_executed = true;
             $this->value = $this->module->process($input);
