@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class ModuleTests extends TestCase  {
 
-    public function testExecution() {
+    public function testProcessModules() {
         $mh = new ModuleHelper();
         $modules = ["module1" => new Module1()];
         $instructions = [
