@@ -18,7 +18,7 @@ class RouteDispatcher {
 
     public function render($modules_call_decl, ITemplate $template, UserPermissions $user_permissions) {
         $variables = Module::processModules($modules_call_decl, $this->module_list);
-        $twig = $template->makeTwig($user_permissions, $twig_factory);
+        $twig = $template->makeTwig($user_permissions, $this->twig_factory);
         return $twig->render($template->name(), $variables);
     }
 
