@@ -8,6 +8,11 @@ use PHPUnit\Framework\TestCase;
 class FileSystemTemplateTest extends TestCase {
     static $DIR = 'test_templates';
 
+    public function testName() {
+        $template = new FileSystemTemplate(self::$DIR, 'foo.html');
+        $this->assertEquals('foo.html', $template);
+    }
+
     public function testFooContent() {
         $content = 'foo';
         self::writeFile('index.txt', $content);

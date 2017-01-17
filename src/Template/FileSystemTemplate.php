@@ -14,7 +14,7 @@ class FileSystemTemplate implements ITemplate {
     }
 
     public function name() {
-        return $name_v;
+        return $this->name_v;
     }
 
     public function makeTwig(UserPermissions $user_permissions) {
