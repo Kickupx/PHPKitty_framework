@@ -10,3 +10,4 @@
 /cache/*
 /cache
 /.htaccess
+/test_templates
