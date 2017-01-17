@@ -16,6 +16,15 @@ class WantedIndiceTest extends TestCase  {
         $this->assertEquals([], $target_array);
     }
 
+    public function testReplaceNotArrayTarget() {
+        $wanted = new WantedIndicesStore();
+        $values = [['foo' => 'bar']];
+        $target = $wanted->foo;
+        
+        $wanted->replaceWantedIndices($values, $target);
+        $this->assertEquals('bar', $target);
+    }
+
     public function testReplace1D() {
         $wanted = new WantedIndicesStore();
         $values = [['foo' => 'bar']];
