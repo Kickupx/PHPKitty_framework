@@ -70,7 +70,7 @@ class LazyModuleProcessor implements \ArrayAccess {
     private function run_if_necessary() {
         if(!$this->has_executed) {
             $this->has_executed = true;
-            $this->value = $this->module->process($input);
+            $this->value = $this->module->process($this->input);
         }
     }
 }
