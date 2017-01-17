@@ -9,7 +9,6 @@ class LazyModuleLoaderGenerator {
     }
 
     public function generate() {
-        $prepend = "<?php\n " . $this->code . "?>\n";
-        return $prepend . $code;
+        return "<?php\n " . $this->code . "?>\n";
     }
 }
