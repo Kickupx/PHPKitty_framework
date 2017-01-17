@@ -7,7 +7,7 @@ class LazyModuleEmit extends \Twig_TokenParser {
     private $generator;
 
     public function __construct(LazyModuleLoaderGenerator $generator) {
-        $this->template = $generator;
+        $this->generator = $generator;
     }
 
     public function parse(\Twig_Token $token)
