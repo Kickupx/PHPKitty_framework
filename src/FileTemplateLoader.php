@@ -9,7 +9,7 @@ class FileTemplateLoader extends \Twig_Loader_Filesystem {
     }
 
     public function addModule($output_key) {
-        $this->code .= '$context[\'' . $output_key . '\'] = PHPKitty\\DI::get(PHPKitty\\LazyModuleProcessorStore::class)->get(\'' . $output_key . '\');\n';
+        $this->code .= '$context[\'' . $output_key . '\'] = PHPKitty\\DI::get(PHPKitty\\LazyModuleProcessorStore::class)->get(\'' . $output_key . "');\n";
     }
 
     public function getSourceContext($name) {
@@ -19,7 +19,7 @@ class FileTemplateLoader extends \Twig_Loader_Filesystem {
     }
 
     private function generateModuleProcessorCalls($code) {
-        $prepend = '<?php\n ' . $this->code . '?>\n';
+        $prepend = "<?php\n " . $this->code . "?>\n";
         return $prepend . $code;
     }
 }
