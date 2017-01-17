@@ -14,7 +14,7 @@ class FileTemplateLoader extends \Twig_Loader_Filesystem {
 
     public function getSourceContext($name) {
         $source = parent::getSourceContext($name);
-        $code = $this->generateModuleProcessorCalls($source->code);
+        $code = $this->generateModuleProcessorCalls($source->getCode());
         return new \Twig_Source($code, $source->getName(), $source->getPath());
     }
 
