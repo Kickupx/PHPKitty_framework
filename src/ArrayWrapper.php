@@ -9,7 +9,7 @@ class ArrayWrapper {
     }
 
     public function __get($name) {
-        if(!isset($this->array[$name]))
+        if(!array_key_exists($name, $this->array))
             return null;
         return $this->array[$name];
     }

@@ -7,9 +7,13 @@ class Module implements IModule {
     }
 
     public static function processModules(array $mod_instructions, array $mods) {
-        $variables = [];
+        $result = [];
     
-        foreach($mod_instructions as $name => $instructions) {
+        foreach($mod_instructions as $variable => $instruction) {
+            if(!$instruction instanceof ModuleInstruction)
+                throw new Exception("A module instruction is not an instance of ModuleInstruction");
+
+            $name = $instruction->name();
             if(!isset($mods[$name]))
                 throw new Exception("There are no module named $name");
             
@@ -17,26 +21,19 @@ class Module implements IModule {
             if(!($module instanceof Module))
                 throw new Exception("Module with name $module is not an instance of class Module");
             
-            $input = [];
-            if(isset($instructions["input"])) {
-                $input = $instructions["input"];
-                if(!is_array($input))
-                    throw new Exception("Input of module $name has to be an array");
-            }
-            
+            $input = $instruction->input();
             $output = $module->process($input);
             
             if(!is_null($output)) {
-                if(!isset($instructions["output"]) || !is_string($instructions["output"]))
+                if(!is_string($variable))
                     throw new Exception("output key of module with name $name is not defined even though it spites out output");
                 
-                $output_key = $instructions["output"];
-                if(isset($variables[$output_key]))
+                if(array_key_exists($variable, $result))
                     throw new Exception("Output variable \"$output\" is defined several times");
-                $variables[$output_key] = $output;
+                $result[$variable] = $output;
             }
         }
         
-        return $variables;
+        return $result;
     }
 }
