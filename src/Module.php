@@ -2,8 +2,10 @@
 namespace PHPKitty;
 
 class Module implements IModule {
+    //Module behavior
     public $lazy = true;
 
+    //Super variables
     public $globals;
     public $server;
     public $get;
@@ -14,6 +16,7 @@ class Module implements IModule {
     public $request;
     public $env;
 
+    //Other
     public $config;
     public $db;
 
