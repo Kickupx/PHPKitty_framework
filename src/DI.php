@@ -16,9 +16,9 @@ class DI {
         self::$di = $container;
     }
 
-    public static function setupPHPKitty(array $permissions) {
+    public static function setupPHPKitty($dir, array $permissions) {
         $di_builder = new ContainerBuilder();
-        $di_builder->addDefinitions(__DIR__ . '/env.php');
+        $di_builder->addDefinitions($dir . '/env.php');
 
         $aw = function(array $arr) {
             return function(Container $c) use($arr) { new ArrayWrapper($arr); };
@@ -38,12 +38,12 @@ class DI {
                 return $c->get(\PHPKitty\FileTemplateLoader::class);
             },
             FileTemplateLoader::class => function(Container $c) {
-                return new FileTemplateLoader(__DIR__ . '/app/templates');
+                return new FileTemplateLoader($dir . '/app/templates');
             },
             \Twig_Environment::class => function(Container $c) {
                 $permissions = $c->get(UserPermissions::class);
                 $config = $c->get('app.debug') ? [] : [
-                    'cache' => __DIR__ . '/cache/twig'
+                    'cache' => $dir . '/cache/twig'
                 ];
 
                 $twig = new \Twig_Environment($c->get(Twig_LoaderInterface::class), $config);
