@@ -37,10 +37,10 @@ class DI {
             \Twig_LoaderInterface::class => function(Container $c) {
                 return $c->get(FileTemplateLoader::class);
             },
-            FileTemplateLoader::class => function(Container $c) {
+            FileTemplateLoader::class => function(Container $c) use($dir) {
                 return new FileTemplateLoader($dir . '/app/templates');
             },
-            \Twig_Environment::class => function(Container $c) {
+            \Twig_Environment::class => function(Container $c) use($dir) {
                 $permissions = $c->get(UserPermissions::class);
                 $config = $c->get('app.debug') ? [] : [
                     'cache' => $dir . '/cache/twig'
