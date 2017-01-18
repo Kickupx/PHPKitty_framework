@@ -15,6 +15,7 @@ class Module implements IModule {
     public $env;
 
     public $config;
+    public $db;
 
     public function beforeProcessing() {
         $this->globals    = DI::get('$GLOBALS');
@@ -33,6 +34,7 @@ class Module implements IModule {
                  return null;
              } 
         };
+        $this->db = function() { return DI::get(DB); };
     }
 
     public function process(array $input) {
