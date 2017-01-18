@@ -14,6 +14,8 @@ class Module implements IModule {
     public $request;
     public $env;
 
+    public $config;
+
     public function beforeProcessing() {
         $this->globals    = DI::get('$GLOBALS');
         $this->server     = DI::get('$_SERVER');
@@ -24,10 +26,15 @@ class Module implements IModule {
         $this->session    = DI::get('$_COOKIE');
         $this->request    = DI::get('$_REQUEST');
         $this->env        = DI::get('$_ENV');
+        $this->config     = function($id) { return DI::get($id); };
     }
 
     public function process(array $input) {
         return null;
+    }
+
+    public function install(array $input) {
+
     }
 
     public static function processModules(array $mod_instructions, array $mods) {
