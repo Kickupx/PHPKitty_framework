@@ -16,7 +16,7 @@ class DI {
         self::$di = $container;
     }
 
-    public static function setupPHPKitty() {
+    public static function setupPHPKitty(array $permissions) {
         $di_builder = new ContainerBuilder();
         $di_builder->addDefinitions(__DIR__ . '/env.php');
 
