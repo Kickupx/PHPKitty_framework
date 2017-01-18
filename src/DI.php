@@ -35,7 +35,7 @@ class DI {
             '$_ENV' => $aw($_ENV),
 
             \Twig_LoaderInterface::class => function(Container $c) {
-                return $c->get(\PHPKitty\FileTemplateLoader::class);
+                return $c->get(FileTemplateLoader::class);
             },
             FileTemplateLoader::class => function(Container $c) {
                 return new FileTemplateLoader($dir . '/app/templates');
@@ -46,7 +46,7 @@ class DI {
                     'cache' => $dir . '/cache/twig'
                 ];
 
-                $twig = new \Twig_Environment($c->get(Twig_LoaderInterface::class), $config);
+                $twig = new \Twig_Environment($c->get(\Twig_LoaderInterface::class), $config);
                 $twig->addTokenParser(new TwigTokenParser\Permission($permissions));
                 $twig->addTokenParser(new TwigTokenParser\LazyModuleEmit($c->get(LazyModuleLoaderGenerator::class)));
                 return $twig;
