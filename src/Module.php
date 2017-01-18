@@ -4,6 +4,28 @@ namespace PHPKitty;
 class Module implements IModule {
     public $lazy = true;
 
+    public $globals;
+    public $server;
+    public $get;
+    public $post;
+    public $files;
+    public $cookie;
+    public $session;
+    public $request;
+    public $env;
+
+    public function beforeProcessing() {
+        $this->globals    = DI::get('$GLOBALS');
+        $this->server     = DI::get('$_SERVER');
+        $this->get        = DI::get('$_GET');
+        $this->post       = DI::get('$_POST');
+        $this->files      = DI::get('$_FILES');
+        $this->cookie     = DI::get('$_COOKIE');
+        $this->session    = DI::get('$_COOKIE');
+        $this->request    = DI::get('$_REQUEST');
+        $this->env        = DI::get('$_ENV');
+    }
+
     public function process(array $input) {
         return null;
     }
