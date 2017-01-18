@@ -26,7 +26,13 @@ class Module implements IModule {
         $this->session    = DI::get('$_COOKIE');
         $this->request    = DI::get('$_REQUEST');
         $this->env        = DI::get('$_ENV');
-        $this->config     = function($id) { return DI::get($id); };
+        $this->config     = function($id) { 
+            try {
+                return DI::get($id);
+             } catch(\Exception $e) {
+                 return null;
+             } 
+        };
     }
 
     public function process(array $input) {
