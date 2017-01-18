@@ -2,6 +2,8 @@
 namespace PHPKitty;
 
 class Module implements IModule {
+    public $lazy = true;
+
     public function process(array $input) {
         return null;
     }
