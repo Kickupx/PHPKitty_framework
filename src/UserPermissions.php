@@ -12,6 +12,10 @@ final class UserPermissions {
     public static function getCurrent() {
         return self::$permission;
     }
+	
+	public function getCurrentName() {
+		return $this->permission_names[self::$permission];
+	}
 
     public function setCurrent($name) {
         $v = $this->valueOf($name);

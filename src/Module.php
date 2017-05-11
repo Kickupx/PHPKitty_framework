@@ -19,6 +19,7 @@ class Module implements IModule {
     //Other
     public $config;
     public $db;
+	public $permissions;
 
     public function beforeProcessing() {
         $this->globals    = DI::get('$GLOBALS');
@@ -38,6 +39,7 @@ class Module implements IModule {
              } 
         };
         $this->db = function() { return DI::get(DB); };
+		$this->permissions = function() { return DI::get(UserPermissions); };
     }
 
     public function process(array $input) {
